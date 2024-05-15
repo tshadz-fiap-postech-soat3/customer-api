@@ -38,7 +38,7 @@ export class CustomersService implements ICustomersService {
   }
 
   async update(id: string, updateCustomerDto: UpdateCustomerDto) {
-    const result =  await this.customersRepository.update(id, updateCustomerDto);
+    const result = await this.customersRepository.update(id, updateCustomerDto);
     if (!result) {
       return new ResultError('Not able to update the product');
     }

@@ -8,14 +8,13 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CustomersService } from '../../@core/customer/customers.service';
 import { CreateCustomerDto } from '../../@core/customer/entitites/create-customer.dto';
 import { UpdateCustomerDto } from '../../@core/customer/entitites/update-customer.dto';
-import { CustomersController } from 'src/@core/customer/controller/customers.controller';
+import { CustomersController } from '../../@core/customer/controller/customers.controller';
 
 @ApiTags('customer')
 @Controller('customers')
-export class CustomersApi{
+export class CustomersApi {
   constructor(private readonly customersController: CustomersController) {}
 
   @Post()

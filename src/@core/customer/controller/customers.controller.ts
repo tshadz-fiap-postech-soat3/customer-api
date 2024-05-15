@@ -15,15 +15,18 @@ export class CustomersController implements ICustomersController {
   ) {}
 
   async create(createCustomertDto: CreateCustomerDto) {
-    const product = await this.customersService.findByCpf(createCustomertDto.cpf);
-    if (product.status !== ResultStatus.ERROR) {
+    const customer = await this.customersService.findByCpf(
+      createCustomertDto.cpf,
+    );
+    if (customer.status !== ResultStatus.ERROR) {
       return new ApplicationResult(
         ApplicationResultEvents.ERROR,
         'Customer already exists',
       );
     }
-    const createdProduct = await this.customersService.create(createCustomertDto);
-    if (createdProduct.status === ResultStatus.ERROR) {
+    const createdCustomer =
+      await this.customersService.create(createCustomertDto);
+    if (createdCustomer.status === ResultStatus.ERROR) {
       return new ApplicationResult(
         ApplicationResultEvents.ERROR,
         'Not able to create the customer',
@@ -31,20 +34,30 @@ export class CustomersController implements ICustomersController {
     }
     return new ApplicationResult(
       ApplicationResultEvents.SUCCESS_CREATED,
-      createdProduct as unknown as string,
+      createdCustomer as unknown as string,
     );
   }
 
   async findAll() {
-    return await this.customersService.findAll();
+    const customers = await this.customersService.findAll();
+    if (customers.status === ResultStatus.ERROR) {
+      return new ApplicationResult(
+        ApplicationResultEvents.ERROR,
+        'Error to fetch customers',
+      );
+    }
+    return new ApplicationResult(
+      ApplicationResultEvents.SUCCESS_CREATED,
+      customers,
+    );
   }
 
   async findOne(category: string) {
     return await this.customersService.findByCpf(category);
   }
 
-  async update(id: string, updateProductDto: UpdateCustomerDto) {
-    return await this.customersService.update(id, updateProductDto);
+  async update(id: string, updateCustomerDto: UpdateCustomerDto) {
+    return await this.customersService.update(id, updateCustomerDto);
   }
 
   async remove(id: string) {

@@ -1,4 +1,3 @@
-
 import { Result } from '../application/result/result';
 import { CreateCustomerDto } from './entitites/create-customer.dto';
 import { CustomerEntity } from './entitites/customer';
@@ -12,7 +11,7 @@ export abstract class ICustomersService {
     id: string,
     product: UpdateCustomerDto,
   ): Promise<Result<CustomerEntity>>;
-   public abstract findByCpf(cpf: string): Promise<Result<CustomerEntity>>;
+  public abstract findByCpf(cpf: string): Promise<Result<CustomerEntity>>;
   public abstract findAll(): Promise<Result<CustomerEntity[]>>;
   public abstract remove(id: string): Promise<void>;
 }

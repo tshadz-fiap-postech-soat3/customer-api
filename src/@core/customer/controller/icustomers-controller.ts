@@ -13,6 +13,6 @@ export abstract class ICustomersController {
     product: UpdateCustomerDto,
   ): Promise<Result<CustomerEntity>>;
   public abstract findOne(name: string): Promise<Result<CustomerEntity>>;
-  public abstract findAll(): Promise<Result<CustomerEntity[]>>;
+  public abstract findAll(): Promise<ApplicationResult<any>>;
   public abstract remove(id: string): Promise<void>;
 }
