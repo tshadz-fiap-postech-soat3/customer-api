@@ -27,12 +27,17 @@ export class PrismaCustomersRepository implements ICustomersRepository {
     });
   }
 
-  async findByCpf(cpf: string): Promise<CustomerEntity> {
-    return await this.prisma.customer.findUniqueOrThrow({
+  async findByCpf(cpf: string): Promise<CustomerEntity | null> {
+    const customers = await this.prisma.customer.findMany({
       where: {
         cpf: cpf,
       },
     });
+    if (customers.length === 1) {
+      return customers[0];
+    } else {
+      return null;
+    }
   }
 
   async findAll(): Promise<CustomerEntity[]> {

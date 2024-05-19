@@ -21,7 +21,6 @@ describe('PrismaCustomersRepository', () => {
             customer: {
               create: jest.fn(),
               update: jest.fn(),
-              findUniqueOrThrow: jest.fn(),
               findMany: jest.fn(),
               delete: jest.fn(),
             },
@@ -92,13 +91,13 @@ describe('PrismaCustomersRepository', () => {
       };
 
       jest
-        .spyOn(prismaService.customer, 'findUniqueOrThrow')
-        .mockResolvedValue(mockCustomer as any);
+        .spyOn(prismaService.customer, 'findMany')
+        .mockResolvedValue([mockCustomer as any]);
 
       const result = await repository.findByCpf(cpf);
 
       expect(result).toEqual(mockCustomer);
-      expect(prismaService.customer.findUniqueOrThrow).toHaveBeenCalledWith({
+      expect(prismaService.customer.findMany).toHaveBeenCalledWith({
         where: { cpf: cpf },
       });
     });

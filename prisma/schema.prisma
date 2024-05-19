@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Customer {
-  id    String  @id @default(uuid())
-  cpf   String  @unique
-  name  String
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  cpf  String @unique
+  name String
 }

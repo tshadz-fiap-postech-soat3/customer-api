@@ -46,10 +46,7 @@ export class CustomersController implements ICustomersController {
         'Error to fetch customers',
       );
     }
-    return new ApplicationResult(
-      ApplicationResultEvents.SUCCESS_CREATED,
-      customers,
-    );
+    return new ApplicationResult(ApplicationResultEvents.SUCCESS, customers);
   }
 
   async findOne(category: string) {

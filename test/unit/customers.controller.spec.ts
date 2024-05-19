@@ -85,7 +85,7 @@ describe('CustomersController', () => {
       const response = await controller.findAll();
       expect(response).toEqual(
         new ApplicationResult(
-          ApplicationResultEvents.SUCCESS_CREATED,
+          ApplicationResultEvents.SUCCESS,
           new ResultSuccess([customers]),
         ),
       );
