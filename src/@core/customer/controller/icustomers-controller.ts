@@ -14,5 +14,5 @@ export abstract class ICustomersController {
   ): Promise<Result<CustomerEntity>>;
   public abstract findOne(name: string): Promise<Result<CustomerEntity>>;
   public abstract findAll(): Promise<ApplicationResult<any>>;
-  public abstract remove(id: string): Promise<void>;
+  public abstract remove(id: string): Promise<Result<CustomerEntity>>;
 }

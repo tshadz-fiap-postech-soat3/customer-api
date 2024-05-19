@@ -10,5 +10,5 @@ export abstract class ICustomersRepository {
   ): Promise<CustomerEntity>;
   public abstract findByCpf(cpf: string): Promise<CustomerEntity>;
   public abstract findAll(): Promise<CustomerEntity[]>;
-  public abstract delete(id: string): Promise<void>;
+  public abstract delete(id: string): Promise<CustomerEntity>;
 }

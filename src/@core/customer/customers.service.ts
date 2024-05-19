@@ -32,7 +32,7 @@ export class CustomersService implements ICustomersService {
   async findByCpf(cpf: string) {
     const result = await this.customersRepository.findByCpf(cpf);
     if (!result) {
-      return new ResultError('Product not exist');
+      return new ResultError('Not Found');
     }
     return new ResultSuccess(result);
   }
@@ -40,12 +40,16 @@ export class CustomersService implements ICustomersService {
   async update(id: string, updateCustomerDto: UpdateCustomerDto) {
     const result = await this.customersRepository.update(id, updateCustomerDto);
     if (!result) {
-      return new ResultError('Not able to update the product');
+      return new ResultError('Not able to update customer data');
     }
     return new ResultSuccess(result);
   }
 
   async remove(id: string) {
-    return await this.customersRepository.delete(id);
+    const result = await this.customersRepository.delete(id);
+    if (!result) {
+      return new ResultError('Not able to update customer data');
+    }
+    return new ResultSuccess(result);
   }
 }

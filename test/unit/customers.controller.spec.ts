@@ -58,6 +58,21 @@ describe('CustomersController', () => {
         ),
       );
     });
+
+    it('should return an error if unable to create a customers', async () => {
+      const createCustomerDto = createCustomerDtoFixture();
+      jest
+        .spyOn(customersService, 'findByCpf')
+        .mockResolvedValue(new ResultSuccess(createCustomerDto));
+
+      const response = await controller.create(createCustomerDto);
+      expect(response).toEqual(
+        new ApplicationResult(
+          ApplicationResultEvents.ERROR,
+          'Customer already exists',
+        ),
+      );
+    });
   });
 
   describe('findAll', () => {
@@ -68,7 +83,6 @@ describe('CustomersController', () => {
         .mockResolvedValue(new ResultSuccess([customers]));
 
       const response = await controller.findAll();
-      console.log(response);
       expect(response).toEqual(
         new ApplicationResult(
           ApplicationResultEvents.SUCCESS_CREATED,

@@ -142,7 +142,10 @@ describe('CustomersApi', () => {
   describe('remove', () => {
     it('should remove a customer', async () => {
       const id = '1';
-      jest.spyOn(customersController, 'remove').mockResolvedValue(undefined);
+      const result = customerFixture();
+      jest
+        .spyOn(customersController, 'remove')
+        .mockResolvedValue(new ResultSuccess(result));
 
       await customersApi.remove(id);
       expect(customersController.remove).toHaveBeenCalledWith(id);

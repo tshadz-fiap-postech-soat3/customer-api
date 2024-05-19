@@ -39,8 +39,8 @@ export class PrismaCustomersRepository implements ICustomersRepository {
     return await this.prisma.customer.findMany();
   }
 
-  async delete(id: string): Promise<void> {
-    await this.prisma.customer.delete({
+  async delete(id: string): Promise<CustomerEntity> {
+    return await this.prisma.customer.delete({
       where: {
         id: id,
       },

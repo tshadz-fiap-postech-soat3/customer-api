@@ -13,5 +13,5 @@ export abstract class ICustomersService {
   ): Promise<Result<CustomerEntity>>;
   public abstract findByCpf(cpf: string): Promise<Result<CustomerEntity>>;
   public abstract findAll(): Promise<Result<CustomerEntity[]>>;
-  public abstract remove(id: string): Promise<void>;
+  public abstract remove(id: string): Promise<Result<CustomerEntity>>;
 }
