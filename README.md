@@ -36,20 +36,18 @@ Foi disponibilizado o passo-a-passo para rodar esse projeto localmente com o uso
 
 ```bash
 # Clone este repositório
-$ git clone <https://github.com/tshadz/soat3-tech-chalenge>
+$ git clone <https://github.com/tshadz-fiap-postech-soat3>
 
 # Acesse a pasta do projeto no terminal
-$ cd ./soat3-tech-chalenge
+$ cd ./customer-api
 
 # Crie um arquivo `.env` na pasta raíz do projeto com as suas informações:
 
-MYSQL_HOST = "fast-food-db"
-MYSQL_ROOT_PASSWORD = "root"
-MYSQL_ROOT_USER = "root"
-MYSQL_DATABASE = "fastfood"
-MYSQL_USER = "user"
-MYSQL_PASSWORD = "user"
-MYSQL_PORT = 3306
+MONGODB_PORT = 27017
+MONGO_INITDB_DATABASE = fast-food
+MONGODB_DB = fast-food
+MONGODB_USER = root
+MONGODB_PASSWORD = example
 ```
 <h3 id="docker-compose"> Docker-compose </h3>
 
@@ -61,7 +59,7 @@ $ docker compose up -d --build
 $ docker exec -it fast-food sh
 
 # Dentro do container rode as migrations
-$ npx prisma migrate dev --name init && npx ts-node prisma/seed.ts
+$ npx ts-node prisma/seed.ts
 
 # O servidor inciará na porta:8080 - acesse <http://localhost:8080>
 ```
@@ -96,12 +94,3 @@ $  kubectl port-forward deployment/fast-food-deployment 8080:8080
 
 ### Após rodar o projeto, acesse http://localhost:8080/swagger
 ![swagger](https://github.com/tshadz/soat3-tech-chalenge/assets/80704054/f5ba4ca7-a7b4-4dc8-9d0c-3c3c2f7cd2c7)
-
-## Fluxo para consumo da API simulando um atendimento no totem
-
-1. Get Producs
-2. Post Customer (opcional)
-3. Post Order (customer id é opcional)
-4. Post Order Item (usando os IDs dos produtos e do pedido que foi criado)
-5. Patch Payment (o pagamento será automaticamente realizado)
-
