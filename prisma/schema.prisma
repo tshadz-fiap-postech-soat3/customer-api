@@ -14,4 +14,6 @@ model Customer {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   cpf  String @unique
   name String
+  email String @unique
+  address String
 }

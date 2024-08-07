@@ -9,6 +9,7 @@ export abstract class ICustomersRepository {
     customer: UpdateCustomerDto,
   ): Promise<CustomerEntity>;
   public abstract findByCpf(cpf: string): Promise<CustomerEntity | null>;
+  public abstract findById(id: string): Promise<CustomerEntity | null>;
   public abstract findAll(): Promise<CustomerEntity[]>;
-  public abstract delete(id: string): Promise<CustomerEntity>;
+  public abstract delete(id: string): Promise<boolean>;
 }

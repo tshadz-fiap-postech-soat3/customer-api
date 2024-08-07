@@ -46,10 +46,14 @@ export class CustomersService implements ICustomersService {
   }
 
   async remove(id: string) {
+    const customer = await this.customersRepository.findById(id);
+    if (!customer) {
+      return false;
+    }
     const result = await this.customersRepository.delete(id);
     if (!result) {
-      return new ResultError('Not able to update customer data');
+      return false;
     }
-    return new ResultSuccess(result);
+    return result;
   }
 }
